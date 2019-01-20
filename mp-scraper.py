@@ -2,14 +2,14 @@ import sys
 import csv
 import time
 import requests
+import string
 from bs4 import BeautifulSoup
 
 def collect_routes(area, writer):
 
     routes = area.select('.mp-sidebar tr')
-    location = '>'.join([link.text for link in area.select('.mb-half > a')][1:] 
-        + [area.select_one('.mp-sidebar > h3').string[10:]])
-
+    location  = ('>'.join([link.get('href').split('/')[-1].replace('-', ' ') 
+        for link in area.select('.mb-half > a')][1:] + [area.select_one('.mp-sidebar > h3').string[10:]]))
 
     for route in routes:
 
@@ -42,7 +42,7 @@ def collect_routes(area, writer):
 def crawl_from_area(URL, writer):
 
     # Don't overload their servers!
-    time.sleep(10)
+    time.sleep(5)
 
     area = BeautifulSoup(requests.get(URL).text, 'html.parser')
 
