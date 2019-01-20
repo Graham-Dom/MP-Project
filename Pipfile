@@ -9,7 +9,7 @@ verify_ssl = true
 beautifulsoup4 = "*"
 requests = "*"
 ipykernel = "*"
-pandas = "*"
+treelib = "*"
 
 [requires]
 python_version = "3.7"
