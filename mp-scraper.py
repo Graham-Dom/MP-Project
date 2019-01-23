@@ -49,7 +49,14 @@ def crawl_from_area(URL, writer):
     # Don't overload their servers!
     time.sleep(5)
 
-    area = BeautifulSoup(requests.get(URL).text, 'html.parser')
+    req = requests.get(URL)
+
+    if req.status_code == 404:
+        print('\nCouldn\'t open URL: ' + URL + '\n')
+        return
+
+    area = BeautifulSoup(req.text, 'html.parser')
+
 
     # If there are sub areas, crawl each of them
     area_info = area.select_one('.mp-sidebar > h3')
@@ -69,17 +76,38 @@ def crawl_from_area(URL, writer):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) == 2:
-        url = sys.argv[1]
-        with open('mp-crawl-output.csv', 'w', newline = '') as csvfile:
-            fieldnames = ['Name', 'Type', 'Grade', 'Rating', 'Location']
+    if len(sys.argv) >= 2:
 
-            # This creates a writer object, which we pass to the crawler, and use to record route information
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader()
-            crawl_from_area(url, writer)
+        # Make sure URL is corect format
+        if  sys.argv[1][:37] == 'https://www.mountainproject.com/area/':
+            url = sys.argv[1]
+
+            file_name = 'mp-crawl-output.csv'
+
+            if len(sys.argv) == 3:
+
+                if sys.argv[2][-4:] == '.csv':
+                    file_name = sys.argv[2]
+
+                else:
+                    print('\nCan\'t use ' + sys.argv[2] + ' as output file, defaulting to mp-crawl-output.csv\n')
+
+
+            with open(file_name, 'w', newline = '') as csvfile:
+                fieldnames = ['Name', 'Type', 'Grade', 'Rating', 'Location']
+                # This creates a writer object, which we pass to the crawler, and use to record route information
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                crawl_from_area(url, writer)
+
+        else:
+            print('\nPlease enter a mountain project area URL to search from')
+            print('i.e. https://www.mountainproject.com/area/...\n')
+
+
     else:
-        print("Please enter a mountain project area URL to search from")
+        print('\nPlease enter a mountain project area URL to search from and optionally a .csv file name')
+        print('Default file name is mp-crawl-output.csv\n')
 
      
 
