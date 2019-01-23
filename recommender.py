@@ -171,7 +171,7 @@ def destination_recommendations(loc_tree):
 
         # Remove the highest level location - this is the location that the user provided the URL for - not helpful
         del all_locations[1]
-        print("The top ten destinations based on the data and climbing preferences your input are:")
+        print('The top ten destinations based on the data and climbing preferences you input are:')
         for destination in nlargest(10, all_locations):
             print(destination['name'])
     print()
@@ -183,13 +183,13 @@ def crag_reccomendations(loc_tree):
     
     # Print the 10 best crags based on the users preferences, 
     if len(all_crags) >= 10:
-        print("The top ten specific crags based on the data and climbing preferences your input are:")
+        print('The top ten specific crags based on the data and climbing preferences you input are:')
         for crag in nlargest(10, all_crags):
             print(crag['name'])
 
     # If there are not 10 then print all of them
     elif len(all_crags) > 1:
-        print("The top specific crags based on the data and climbing preferences your input are:")
+        print('The top specific crags based on the data and climbing preferences you input are:')
         for crag in all_crags:
             print(crag['name'])
 
@@ -252,7 +252,7 @@ def get_preferences():
     while not grades:
 
         if BorC == 'B':
-            type = {"Boulder"}
+            type = {'Boulder'}
             inp = input(boulder_message)
 
             if inp == 'any':
@@ -273,13 +273,13 @@ def get_preferences():
                     grades = get_boulder_grades(lower, upper)
 
                 else:
-                    print("Please check examples and reformat your input.\n")
+                    print('Please check examples and reformat your input.\n')
 
             elif inp == 'Q':
                 return []
 
             else:
-                print("Please check examples and reformat your input.\n")
+                print('Please check examples and reformat your input.\n')
 
 
         else:
@@ -340,7 +340,7 @@ def get_preferences():
 
 def main():
 
-    print("\nWelcome to the climb recommender program!\n")
+    print('\nWelcome to the climb recommender program!\n')
 
     csvfile = open_user_csv()
     preferences = get_preferences()
@@ -353,5 +353,5 @@ def main():
 
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
