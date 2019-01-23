@@ -69,7 +69,7 @@ def open_user_csv():
         else:
 
             try:
-                csvfile = open(in_file, 'r', newline = '')
+                csvfile = open(in_file, 'r', newline = '', encoding='latin-1')
                 print("Sucessfully opened " + in_file + '\n')
                 return csvfile
 
@@ -165,11 +165,12 @@ class Location_Tree():
 def destination_recommendations(loc_tree):
     # First, make a list of every location in the tree
     all_locations = loc_tree.root.get_subtree()
-    # Remove the highest level location - this is the location that the user provided the URL for - not helpful
-    del all_locations[1] 
     
     # Print the 10 best destinations based on the users preferences, if there are not 10 then skip
     if len(all_locations) >= 10:
+
+        # Remove the highest level location - this is the location that the user provided the URL for - not helpful
+        del all_locations[1]
         print("The top ten destinations based on the data and climbing preferences your input are:")
         for destination in nlargest(10, all_locations):
             print(destination['name'])
@@ -180,11 +181,21 @@ def crag_reccomendations(loc_tree):
     # First, make a list of every location in the tree
     all_crags = loc_tree.root.get_crags()
     
-    # Print the 10 best crags based on the users preferences, if there are not 10 then skip
+    # Print the 10 best crags based on the users preferences, 
     if len(all_crags) >= 10:
         print("The top ten specific crags based on the data and climbing preferences your input are:")
         for crag in nlargest(10, all_crags):
             print(crag['name'])
+
+    # If there are not 10 then print all of them
+    elif len(all_crags) > 1:
+        print("The top specific crags based on the data and climbing preferences your input are:")
+        for crag in all_crags:
+            print(crag['name'])
+
+    else: 
+        print('There are no routes matching your preferences in the provided file\n')
+
     print()
 
 

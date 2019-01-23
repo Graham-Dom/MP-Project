@@ -1,6 +1,5 @@
 __pycache__
 .DS_Store
-Data/*
 .ipynb_checkpoints/
 *.ipynb
-input*
+mp-crawl-output.csv
