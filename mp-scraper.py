@@ -13,11 +13,11 @@ def collect_routes(area, writer):
 
     for route in routes:
 
-        # Screen for non-route elements in sidebar
+        # Some areas have notes in their sidebar, these notes have an ID, which we use to ignore them
         if route.has_attr('id'):
             continue
 
-        # Only scrape rock routes
+        # Only scrape rock routes - sorry ice climbers
         yds = route.select_one('.rateYDS')
         if yds:
             grade = yds.text
@@ -25,7 +25,12 @@ def collect_routes(area, writer):
             continue
 
         name = route.a.text
+        
+        # The route's type is stored as a list of qualifiers, e.g. ['Rock', 'Sport'], or ['Boulder', 'Alpine']
         type = ', '.join(route.select_one('.route-type').attrs['class'][1:])
+
+        # The sidebar shows stars and half-star images to give a rough rating of the route.
+        # This is not the exact rating of the route, but prevents having to open each route individually
         rating = float(len(route.select('img')))
         if 'Half' in route.select('img')[-1].get('src'):
 	        rating -= 0.5
@@ -48,7 +53,12 @@ def crawl_from_area(URL, writer):
 
     # If there are sub areas, crawl each of them
     area_info = area.select_one('.mp-sidebar > h3')
+
+    # Empty areas don't have a header, ignore them
     if area_info: 
+
+        # The mountain project sidebar either says "Areas in ..." or "Routes in ..."
+        # Use this information to decide whether or not to keep exploring subareas
 
         if 'Areas' in area_info.string:
             for sub_area in area.select('.lef-nav-row > a'):
@@ -58,13 +68,13 @@ def crawl_from_area(URL, writer):
             collect_routes(area, writer)
 
 
-
-
 if __name__ == '__main__':
     if len(sys.argv) == 2:
         url = sys.argv[1]
         with open('mp-crawl-output.csv', 'w', newline = '') as csvfile:
             fieldnames = ['Name', 'Type', 'Grade', 'Rating', 'Location']
+
+            # This creates a writer object, which we pass to the crawler, and use to record route information
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             crawl_from_area(url, writer)
