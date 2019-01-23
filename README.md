@@ -33,7 +33,7 @@ This will make a csv file with the name, type, grade, rating, and location of ev
 
 **As you can imagine there are lots of sub-areas within WV, so the scraper paces its requests to 1 every 5 seconds, so as not to overload MP's servers. It can take hours to scrape large areas like Colorado or California. If you are impatient, you can change this pacing, but please keep in mind that MP is a free (and awesome) service, and they may restrict access to those that "Interfere with or damage the operation of the Service".**
 
-### Scraper Example:
+### Recommender Example:
 $python3 recommender.py
 
 Will lead the user through a series of prompts to determine their preferences, and then provide up to 10 destinations and up to 10 individual crags that match those preferences. 
