@@ -37,7 +37,7 @@ This will make a csv file with the name, type, grade, rating, and location of ev
 $python3 recommender.py
 
 Will lead the user through a series of prompts to determine their preferences, and then provide up to 10 destinations and up to 10 individual crags that match those preferences. 
-For example, if we search Colorado for hard sport routes (5.13a and up) we get this output:
+### For example, if we search Colorado for hard sport routes (5.13a and up) we get this output:
 
 The top ten destinations based on the data and climbing preferences you input are:
 Clear Creek Canyon, 
@@ -63,7 +63,7 @@ Seal Rock,
 The Industrial Wall, 
 Anti-Phil Wall
 
-If we look for trad routes in the 5.7-5.9 range we get this output:
+### If we look for trad routes in the 5.7-5.9 range we get this output:
 
 The top ten destinations based on the data and climbing preferences your input are:
 Boulder Canyon, 
@@ -89,4 +89,27 @@ Hallett Peak,
 Redgarden - Tower One, 
 Wind Tower - SW Face 
 
-A CSV file for West Virginia, and some sample input files provided, in the Data and Input Tests directories, respectively. 
+**A CSV file for West Virginia, and some sample input files are provided, in the Data and Input Tests directories, respectively.** 
+
+## License
+MIT License
+
+Copyright (c) 2019 Graham Dominick
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
